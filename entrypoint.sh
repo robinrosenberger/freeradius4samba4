@@ -22,4 +22,12 @@ sed -i '6 a ntlm auth = yes' /etc/samba/smb.conf || {
 
 [ ! -e /var/lib/samba/domjoin.log ] && join_domain
 samba -i &
-freeradius -X
+freeradius -X &
+
+while sleep 60
+do
+unset fail
+ps -aux | grep samba | grep -v grep || fail=1
+ps -aux | grep freeradius | grep -v grep || fail=1
+[ $fail ] && echo 'Something went wrong, exiting' && exit 1
+done
