@@ -6,8 +6,7 @@ VOLUME /etc/samba/
 VOLUME /etc/freeradius/3.0/
 ADD configs.tar /
 
-ENV DC1=linuxmuster
-ENV DC2=lan
+ENV DOMAIN=linuxmuster.lan
 ENV JOIN_USER=global-admin
 ENV ROLE=DC
 
