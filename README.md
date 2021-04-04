@@ -19,7 +19,7 @@ The environment variable DOMAIN is the DNS domainname, which you attempt to join
 ### Things to consider:
 - For compatibility with linuxmuster7-webui's wifi access control, only users in a group called 'wifi' will be authorized. If you run a standard DC, either create that group and use it or remove/change the `--require-membership-of=` part of the uncommented call to `ntlm_auth` in the mschap and ntlm_auth module-configurations packed in the configs.tar before building.
 ## Known limitations
-- The container joins the domain as full-fledged DC, running as RODC resulted in authentication errors during testing. Any input on that matter is welcome.
+- The container joins the domain as full-fledged DC by default. Running as member, as provided by the alternate entrypoint `entrypoint-member.sh`, or as RODC resulted in authentication errors in Freerad while showing no problems in wbinfo -a or ntlm_auth. Any input on that matter is welcome.
 - Freeradius pulls lots of dependencies during installation (looking at you, systemd...), but --no-install-recommends makes samba fail to join the domain. Maybe seperate the layers, but thats up to experimenting
 - The container has only been tested in virtual environments using radtest for verification, no real hardware yet.
 - Demote via `samba-tool domain demote --server=server.linuxmuster.net` does not work due to sync problems. Possibly due to dockers routing. Demote it offline using `samba-tool domain demote --remove-other-dead-server=my-radius-server.linuxmuster.lokal` on another DC.
