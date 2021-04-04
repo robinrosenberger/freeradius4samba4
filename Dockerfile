@@ -11,5 +11,6 @@ ENV JOIN_USER=global-admin
 ENV ROLE=DC
 
 COPY entrypoint.sh /
+COPY entrypoint-member.sh /
 CMD ["/entrypoint.sh"]
 
