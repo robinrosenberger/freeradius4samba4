@@ -1,6 +1,8 @@
 # freeradius4samba4
-This is a Freeradius Docker-container authorizing against an AD-Domain. Developed for linuxmuster7, but should work in any samba4 environment.
-## Usage
+This is a Freeradius Docker-container authorizing against an AD-Domain. Developed for linuxmuster7, but should work in any samba4 environment. Also includes a script to install the neccesary freeradius configs to any other deb/apt-based machine with acces to the domain.
+## Usage - Script
+Simply clone the repo and run the script on an apt-based DC or samba member server `./install-freeradius4samba4.sh`. This installs freeradius and patches the configs to authorize against the locally configured domain.
+## Usage - Docker
 Start the container using the `-it` and `--init` flags. The former to enable entering the join password, the latter to clean up pid files that would prevent starting winbindd after a reboot. It is also advisable (though not strictly neccesary) to provide a static hostname using `-h` or `--hostname`. Example:
 ```
 docker run \
